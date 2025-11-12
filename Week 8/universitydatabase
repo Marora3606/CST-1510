@@ -1,0 +1,40 @@
+import sqlite3
+
+#need to connect or create a database
+conn=sqlite3.connect('example1.db')
+
+#create cursor obj
+cur=conn.cursor()
+
+#create a table
+cur.execute('''CREATE TABLE IF NOT EXISTS users (misis INTEGER PRIMARY KEY, name TEXT, age INTEGER)''')
+
+#Insert data - A row into the table
+cur.execute("INSERT INTO users (misis, name, age)VALUES(?, ?, ?)", (1100124, 'Albert', 38))
+
+cur.executemany("INSERT INTO users (misis, name, age)VALUES(?, ?, ?)", [(1100125, 'Alice', 30),(1100126, 'Bob', 80)])
+
+#changes to be saved by using 'commit'
+conn.commit()
+
+#Query the database
+cur.execute("SELECT * FROM users")
+for row in cur.fetchall():
+    print(row)
+
+#close the connection
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
